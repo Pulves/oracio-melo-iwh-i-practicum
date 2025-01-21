@@ -1,0 +1,18 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title #{title}
+        link(rel="stylesheet", href="/css/style.css")
+    body 
+    h1 #{title}
+    .form_content 
+        form(action="/update-cobj", method="POST") 
+            label Name 
+            input(type="text", name="name", placeholder="Enter with name")
+            label Amount: 
+            input(type="float", name="amount", placeholder="Enter witha unit amount")
+            label Quantity: 
+            input(type="number", name="quantity", placeholder="Enter with product quantity")
+            input(type="submit", value="Send")
