@@ -80,7 +80,7 @@ input[type="text"] {
     padding: .25rem;
 }
 
-input[type="submit"] {
+input[type="submit"], .button-cancel {
     background-color: #888888;
     border: none;
     color: #ffff;
@@ -143,7 +143,7 @@ form {
     justify-content: space-between;
 }
 
-input {
+input, .button-cancel {
     border-radius: 5px;
 }
 
@@ -166,7 +166,15 @@ select{
     width: 8rem;
 }
 
-.content_form > form > input{
+.content_form > form > input, .button-cancel{
+    margin-bottom: .5rem;
     font-weight: bolder;
     font-size: .9rem;
+}
+
+.button-cancel{
+    color: #fff;
+    border: none;
+    background-color: rgb(253, 62, 42);
+
 }
