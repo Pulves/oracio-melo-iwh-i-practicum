@@ -3,11 +3,11 @@ const selectElement = document.getElementsByClassName("button-update-choice")[0]
 
 
 function openOptions(){
-    document.getElementById("myButton").style.display = "block";
+    document.getElementById("myButton").style.display = "flex";
 }
 
 function openSelectform(){
-    document.getElementById("selectObject").style.display = "block";
+    document.getElementById("selectObject").style.display = "flex";
     buttonElement.removeEventListener("click", openOptions, false);
     document.getElementById("myButton").style.display = "none";
 

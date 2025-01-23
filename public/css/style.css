@@ -90,22 +90,36 @@ input[type="submit"] {
 
 .buttons_class, .selectObject {
     display: none;
-    position: fixed;
-    /* bottom: 0;
-    right: 15px; */
-    border: 3px solid #f1f1f1;
+    flex-direction: row;
+    position: absolute;
+    justify-content: center;
+    margin: auto;
     z-index: 9;
     
+}
+.buttons_class{
+    margin-top: 0.6rem;
 }
 
 .selectObject{
     left: 15rem;
 }
-
+.button-update-choice, .button-create{
+    display: block;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 0.5rem;
+    font-weight: bold;
+    color: white;
+    background-color: rgb(5, 190, 208);
+    border-radius: 5px;
+    text-decoration : none;
+}
 .content_class {
-    max-width: 300px;
-    padding: 10px;
-    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0.4rem;
+    
 }
 
 .container{
@@ -135,4 +149,3 @@ form {
 input {
     border-radius: 5px;
 }
-
