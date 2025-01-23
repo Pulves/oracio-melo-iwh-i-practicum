@@ -8,6 +8,9 @@ body, * {
 
 h1 {
     margin: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .cards {
@@ -102,4 +105,37 @@ input[type="submit"] {
     max-width: 300px;
     padding: 10px;
     background-color: white;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 12px;
+    margin-top: 4rem;
+    padding: 15px 15px;
+    
+}
+
+.form_content{
+    display: flex;
+    border: 2px solid #dddddd;
+    box-shadow: 5px 10px 3px 6px #dddddd;
+    padding: 6rem 6rem;
+    justify-content: space-between;
+    border-radius: 15px;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+form > label {
+    margin-top: 5px;
+    color: black;
+    display: block;
+    font-size: inherit;
+}
+form > input {
+    border-radius: 5px;
 }
