@@ -41,6 +41,7 @@ app.get("/", async (request, response) => {
 
     const customObjURL = `/crm/v3/objects/${OBJECT_TYPE}/batch/read`;
     const getCustomObjURL = `/crm/v3/objects/${OBJECT_TYPE}`;
+
     const parameters = {
         limit: 10,
         after: undefined,
@@ -54,10 +55,9 @@ app.get("/", async (request, response) => {
     await instance.get(getCustomObjURL, {parameters}).then(resp => {
         
         //percorre a lista de objetos results pegando seu indice
-        //salva o id de cada record em uma lista
-        //console.log(`Results id: ${JSON.stringify(resp.data.results)}`); 
+        //salva o id de cada record em uma lista 
         for (const key in resp.data.results){
-        listInput.push({'id': resp.data.results[key].id});
+            listInput.push({'id': resp.data.results[key].id});
         };
 
     }).catch(erro => {
@@ -73,9 +73,9 @@ app.get("/", async (request, response) => {
         
         let customObject = [];
         let results = resp.data.results;
-        console.log(`records results: ${JSON.stringify(results)}`)
 
         for (const key in results){
+
             customObject.push(    
                 {
                 "name": results[key].properties.name,
@@ -85,6 +85,7 @@ app.get("/", async (request, response) => {
                 "id": results[key].id
                 }
             );
+            
         };
         
         return customObject;
@@ -95,7 +96,7 @@ app.get("/", async (request, response) => {
 
 
     fs.writeFileSync("./stored.json", JSON.stringify(insertID(respAPI)), (error) => error && console.error(error))
-    // response.send(respAPI)
+ 
     response.render('homepage.pug', 
         {
             customObjects: respAPI, 
@@ -110,24 +111,27 @@ app.get("/", async (request, response) => {
 
 app.get('/update-cobj/', (request, response) => {
     let objectToUpdate = undefined;
-    if (request.query.id){
+    const id = parseInt(request.query.id);
+    if (id){
+
         let fileContent = fs.readFileSync('./stored.json', 'utf-8',(error) => error && console.error(error));
         let newObject = JSON.parse(fileContent);
-        newObject.forEach(object => {
-            if (object.id = request.query.id){
-                objectToUpdate = object;
-            }
-        });
+        objectToUpdate = newObject[id - 1 ];
+        
         response.render('update.pug', {
             title: "Update Custom Object Form | Integrating With HubSpot I Practicum",
             customObject: objectToUpdate
         });
+
     }
-    else{
+    else {
+
         response.render('update.pug', {
             title: "Update Custom Object Form | Integrating With HubSpot I Practicum"
         });
+
     }
+
 });
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
@@ -140,73 +144,43 @@ app.post('/update-cobj', async (request, response) => {
         'amount': amount,
         'quantity': quantity
     };
+
     if (request.body.flag){
+
         const objectId = request.body.id
         let updateCustomURL = `/crm/v3/objects/${OBJECT_TYPE}/${objectId}`
-        const respAPI = await instance.patch(updateCustomURL, {properties}).then(resp => {
-            console.log(JSON.stringify(resp.data));
-            return resp.data;
-        }).catch(erro => {
-            console.error(erro);
-        });
+
+        try{
+
+            await instance.patch(updateCustomURL, {properties});
+
+        }
+        catch(error){
+
+            console.error(error);
+
+        }
     }
     
     else{
+
         const createCustomURL = `/crm/v3/objects/${OBJECT_TYPE}`;
-        const responseAPI = await instance.post(createCustomURL, {properties}).then(resp => {
-            return resp.status;
-        }).catch(error => {
-            console.error(error);
-        });
+
+        try{
         
-        console.log("response API: ", responseAPI);
-    }
-    response.redirect('/')
-});
+            await instance.post(createCustomURL, {properties});
+            
+        }
+        catch(error){
+            
+            console.error(error);
 
-/** 
-* * This is sample code to give you a reference for how you should structure your calls. 
-
-* * App.get sample
-app.get('/contacts', async (req, res) => {
-    const contacts = 'https://api.hubspot.com/crm/v3/objects/contacts';
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    }
-    try {
-        const resp = await axios.get(contacts, { headers });
-        const data = resp.data.results;
-        res.render('contacts', { title: 'Contacts | HubSpot APIs', data });      
-    } catch (error) {
-        console.error(error);
-    }
-});
-
-* * App.post sample
-app.post('/update', async (req, res) => {
-    const update = {
-        properties: {
-            "favorite_book": req.body.newVal
         }
     }
 
-    const email = req.query.email;
-    const updateContact = `https://api.hubapi.com/crm/v3/objects/contacts/${email}?idProperty=email`;
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    };
-
-    try { 
-        await axios.patch(updateContact, update, { headers } );
-        res.redirect('back');
-    } catch(err) {
-        console.error(err);
-    }
-
+    response.redirect('/')
 });
-*/
+
 
 //Recebe um array de objetos e inseri o atributo ID incremental para cada objecto
 function insertID(object){
@@ -218,13 +192,6 @@ function insertID(object){
     return object
 }
 
-const toListObject = (file) => {
-    let newListObject = []
-    for(const chave in file){
-        newListObject.push(file[chave]);
-    }
-    return newListObject;
-}
 
 // * Localhost
 app.listen(3000, () => console.log('Listening on http://localhost:3000'));

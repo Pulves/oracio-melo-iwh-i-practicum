@@ -22,7 +22,7 @@ html(lang="en")
                     label Custom Record
                     select(name='id')
                         each object in customObjects
-                            option(value=`${object.id}`)  #{object.name}
+                            option(value=`${object.id_row}`)  #{object.name}
                         input(type="submit", value="edit this")
         table 
             tr 
