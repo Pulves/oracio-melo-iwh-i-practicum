@@ -8,31 +8,31 @@ html(lang="en")
         //- script(src="/scripts/scripts.js")
         
     body 
-    h1 #{title}
-    if customObject 
-        div.container
-            .form_content 
-                form(action="/update-cobj", method="POST") 
-                    label Name 
-                    input(type="text", name="name", value=`${customObject.name}`, placeholder="Enter with name")
-                    label Amount: 
-                    input(type="float", name="amount", value=`${customObject.amount}`, placeholder="Enter witha unit amount")
-                    label Quantity: 
-                    input(type="number", name="quantity", value=`${customObject.quantity}` placeholder="Enter with product quantity")
-                    input(type="hidden", name="flag", value="1")
-                    input(type="hidden", name="id", value=`${customObject.id}`)
-                    input(type="submit", value="Send") 
-            
-    else
-        div.container
-            .form_content 
-                form(action="/update-cobj", method="POST") 
-                    label Name 
-                    input(type="text", name="name", placeholder="Enter with name")
-                    label Amount: 
-                    input(type="float", name="amount", placeholder="Enter witha unit amount")
-                    label Quantity: 
-                    input(type="number", name="quantity", placeholder="Enter with product quantity")
-                    input(type="submit", value="Send")
+        h1 #{title}
+        if customObject 
+            div.container
+                .form_content 
+                    form(action="/update-cobj", method="POST") 
+                        label Name 
+                        input(type="text", name="name", value=`${customObject.name}`, placeholder="Enter with name")
+                        label Amount: 
+                        input(type="float", name="amount", value=`${customObject.amount}`, placeholder="Enter witha unit amount")
+                        label Quantity: 
+                        input(type="number", name="quantity", value=`${customObject.quantity}` placeholder="Enter with product quantity")
+                        input(type="hidden", name="flag", value="1")
+                        input(type="hidden", name="id", value=`${customObject.id}`)
+                        input(type="submit", value="Send") 
+                
+        else
+            div.container
+                .form_content 
+                    form(action="/update-cobj", method="POST") 
+                        label Name 
+                        input(type="text", name="name", placeholder="Enter with name")
+                        label Amount: 
+                        input(type="float", name="amount", placeholder="Enter witha unit amount")
+                        label Quantity: 
+                        input(type="number", name="quantity", placeholder="Enter with product quantity")
+                        input(type="submit", value="Send")
 
-    
+        

@@ -81,8 +81,9 @@ input[type="text"] {
 }
 
 input[type="submit"] {
-    background-color: lightgrey;
+    background-color: #888888;
     border: none;
+    color: #ffff;
     padding: .375rem 1rem;
     margin-top: 10px;
 }
@@ -130,12 +131,8 @@ form {
     flex-direction: column;
     justify-content: space-between;
 }
-form > label {
-    margin-top: 5px;
-    color: black;
-    display: block;
-    font-size: inherit;
-}
-form > input {
+
+input {
     border-radius: 5px;
 }
+
