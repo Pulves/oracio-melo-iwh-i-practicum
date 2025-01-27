@@ -1,0 +1,42 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title #{title}
+        link(rel="stylesheet", href="/css/style.css")
+        script(src='/scripts/scripts.js', type='module')
+    body 
+        h1 #{title}
+        //- a(href="http://localhost:3000/update-cobj") Add/update this table
+        a(href='#', class='butom-options') Add/update this table
+        
+        div(class="buttons_class" id="myButton") 
+            div.content_class
+                a(href="#", class='button-update-choice') Update Record
+                a(href="http://localhost:3000/update-cobj", type='button', class="button-create") Create New Record 
+        if customObjects
+            div(class="selectObject", id="selectObject")
+                div.content_form
+                    form(action="/update-cobj", method="GET")
+                        label Custom Record
+                        select(name='id')
+                            each object in customObjects
+                                option(value=`${object.id_row}`)  #{object.name}
+                            input(type="submit", value="edit this")
+                            button(type="button" class="button-cancel") Close
+            table 
+                tr 
+                    th Name
+                    th Quantity
+                    th Amount 
+                    th Total Amount
+
+                each customObject in customObjects
+                    tr
+                        td #{customObject.name }
+                        td #{customObject.quantity}
+                        td #{customObject.amount}
+                        td #{customObject.total_amount}
+        else 
+            h2 Create a new record #[a(href="http://localhost:3000/update-cobj")] Click here
