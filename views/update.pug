@@ -5,9 +5,10 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title #{title}
         link(rel="stylesheet", href="/css/style.css")
-        //- script(src="/scripts/scripts.js")
+        script(src="/scripts/scripts.js")
         
     body 
+
         h1 #{title}
         if customObject 
             div.container
@@ -16,7 +17,7 @@ html(lang="en")
                         label Name 
                         input(type="text", name="name", value=`${customObject.name}`, placeholder="Enter with name")
                         label Amount: 
-                        input(type="float", name="amount", value=`${customObject.amount}`, placeholder="Enter witha unit amount")
+                        input(type="number", step="0.01", name="amount", value=`${customObject.amount}`, placeholder="Enter witha unit amount")
                         label Quantity: 
                         input(type="number", name="quantity", value=`${customObject.quantity}` placeholder="Enter with product quantity")
                         input(type="hidden", name="flag", value="1")
@@ -30,7 +31,7 @@ html(lang="en")
                         label Name 
                         input(type="text", name="name", placeholder="Enter with name")
                         label Amount: 
-                        input(type="float", name="amount", placeholder="Enter witha unit amount")
+                        input(type="number", step="0.01", name="amount", placeholder="Enter witha unit amount")
                         label Quantity: 
                         input(type="number", name="quantity", placeholder="Enter with product quantity")
                         input(type="submit", value="Send")

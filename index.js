@@ -138,7 +138,6 @@ app.get('/update-cobj/', (request, response) => {
 app.post('/update-cobj', async (request, response) => {
    
     const {name, amount, quantity} = request.body;
-    
     const properties = {
         'name': name,
         'amount': amount,
@@ -177,7 +176,7 @@ app.post('/update-cobj', async (request, response) => {
 
         }
     }
-
+    
     response.redirect('/')
 });
 
@@ -191,7 +190,6 @@ function insertID(object){
     });
     return object
 }
-
 
 // * Localhost
 app.listen(3000, () => console.log('Listening on http://localhost:3000'));
